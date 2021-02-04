@@ -16,10 +16,10 @@
     </a>
   </nav>
   <div class="container h-75 d-flex justify-content-center align-items-center text-center">
-    <form>
+    <form action="{{ url_for('login') }}" method="POST">
       <h3 class="font-weight-bold mb-3">Let's Login</h3>
-      <input type="email" class="form-control my-3" placeholder="Email">
-      <input type="password" class="form-control my-3" placeholder="Password">
+      <input type="text" class="form-control my-3" name="username" placeholder="Username">
+      <input type="password" class="form-control my-3" name="password" placeholder="Password">
       <label>
         <input type="checkbox" value="remember-me"> Remember me
       </label>
