@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, jsonify, session, redirect, url_for
+from flask import Flask, request, render_template, jsonify, session, redirect, url_for, flash
 from flaskext.mysql import MySQL
 from werkzeug.security import generate_password_hash, check_password_hash
 from models.user import User
@@ -21,11 +21,12 @@ def login():
   user = User(conn=conn).fetch(request.form['email'])
   if user and check_password_hash(user['password'], request.form['password']):
     session['name'] = user['firstname'] + ' ' + user['lastname']
-    session['email'] = user['email']
+    session['id'] = user['id']
     session['loggedIn'] = True
-    return redirect(url_for('index'))
-  
-  return jsonify({'error': 'User or password are incorrect'}), 401
+  else:
+    flash('Wrong password or email', 'danger')
+
+  return redirect(url_for('index'))
 
 @app.route('/logout', methods=['GET'])
 def logout():
@@ -37,17 +38,20 @@ def logout():
 
 @app.route('/register', methods=['POST'])
 def register():
-  user = User(conn=conn).fetch(request.form['email'])
-  if user:
-    return jsonify({'message': 'Email has been registered, please proceed to login'}), 400
+  user = User(conn=conn)
+  data = user.fetch(request.form['email'])
+  if data:
+    flash('Email has been registered, please proceed to login', 'info')
   else:
-    if User(
-      firstname=request.form['firstname'],
-      lastname=request.form['lastname'],
-      email=request.form['email'],
-      password=generate_password_hash(request.form['password']),
-      conn=conn
-    ).create(): return jsonify({'message': 'User has registered successfully'})
+    if user.create({
+      'firstname': request.form['firstname'],
+      'lastname': request.form['lastname'],
+      'email': request.form['email'],
+      'password': generate_password_hash(request.form['password']),
+    }):
+      flash('Data has been registered, please login', 'success')
+  
+  return redirect(url_for('index'))
 
 @app.route('/')
 def index():
