@@ -13,14 +13,14 @@
 {% endblock %}
 
 {% block content %}
-<div class="container h-75 d-flex justify-content-center align-items-center text-center">
-  <form action="{{ url_for('register') }}" method="POST">
-    <h3 class="font-weight-bold mb-3">Go Sign Up!</h3>
-    <input type="text" class="form-control my-3" name="firstname" placeholder="First Name">
-    <input type="text" class="form-control my-3" name="lastname" placeholder="Last Name">
-    <input type="email" class="form-control my-3" name="email" placeholder="Email">
-    <input type="password" class="form-control my-3" name="password" placeholder="Password">
-    <button class="btn btn-md btn-primary btn-block" type="submit">Sign Up</button>
-  </form>
-</div>
+  <div class="container mt-5 d-flex justify-content-center align-items-center text-center">
+    <form action="{{ url_for('register') }}" method="POST">
+      <h3 class="font-weight-bold mb-3">Go Sign Up!</h3>
+      <input type="text" class="form-control my-3" name="firstname" placeholder="First Name">
+      <input type="text" class="form-control my-3" name="lastname" placeholder="Last Name">
+      <input type="email" class="form-control my-3" name="email" placeholder="Email">
+      <input type="password" class="form-control my-3" name="password" placeholder="Password">
+      <button class="btn btn-md btn-primary btn-block" type="submit">Sign Up</button>
+    </form>
+  </div>
 {% endblock %}
