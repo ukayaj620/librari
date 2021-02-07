@@ -23,7 +23,7 @@
     {% endif %}
   {% endwith %}
   <div class="container mt-5 d-flex justify-content-center align-items-center text-center">
-    <form action="{{ url_for('login') }}" method="POST">
+    <form action="{{ url_for('auth.login') }}" method="POST">
       <h3 class="font-weight-bold mb-3">Let's Login!</h3>
       <input type="email" class="form-control my-3" name="email" placeholder="Email">
       <input type="password" class="form-control my-3" name="password" placeholder="Password">

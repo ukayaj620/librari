@@ -1,8 +1,9 @@
 import pymysql
+from db.db import db
 
 class User:
-  def __init__(self, conn=None):
-    self.conn = conn
+  def __init__(self):
+    self.conn = db.connect()
     self.cursor = self.conn.cursor(pymysql.cursors.DictCursor)
 
 

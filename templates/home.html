@@ -3,7 +3,7 @@
 
 {% block menu %}
   <h6 class="font-weight-bold ml-auto my-auto mr-4">Hello, {{ session['name'] }} </h6>
-  <a href="{{ url_for('logout') }}" class="btn btn-primary font-weight-bold">Log Out</a>
+  <a href="{{ url_for('auth.logout') }}" class="btn btn-primary font-weight-bold">Log Out</a>
 {% endblock %}
 
 {% block content %}
