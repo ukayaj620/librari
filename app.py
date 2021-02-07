@@ -1,4 +1,4 @@
-from flask import Flask, render_template, session
+from flask import Flask, render_template, redirect, url_for, session
 from db.db import db
 from views.auth import auth
 import credentials
@@ -18,11 +18,7 @@ app.register_blueprint(auth, url_prefix='/auth')
 def index():
   if 'loggedIn' in session and session['loggedIn'] == True:
     return render_template('home.html')
-  return render_template('index.html')
-
-@app.route('/signup')
-def signup():
-  return render_template('signup.html')
+  return redirect(url_for('auth.signin'))
 
 
 if __name__ == '__main__':

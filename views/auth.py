@@ -5,6 +5,14 @@ from models.user import User
 
 auth = Blueprint('auth', __name__, template_folder='templates', url_prefix='/auth')
 
+@auth.route('/signin')
+def signin():
+  return render_template('signin.html')
+
+@auth.route('/signup')
+def signup():
+  return render_template('signup.html')
+
 @auth.route('/login', methods=['POST'])
 def login():
   user = User().fetch(request.form['email'])
