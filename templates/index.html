@@ -13,7 +13,16 @@
 {% endblock %}
 
 {% block content %}
-  <div class="container h-75 d-flex justify-content-center align-items-center text-center">
+  {% with messages = get_flashed_messages(with_categories=True) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }} d-flex flex-col align-items-center" role="alert">
+          <p class="my-auto">{{ message }}</p>
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+  <div class="container mt-5 d-flex justify-content-center align-items-center text-center">
     <form action="{{ url_for('login') }}" method="POST">
       <h3 class="font-weight-bold mb-3">Let's Login!</h3>
       <input type="email" class="form-control my-3" name="email" placeholder="Email">
