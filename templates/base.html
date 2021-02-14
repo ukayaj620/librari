@@ -14,7 +14,21 @@
     <a class="navbar-brand" href="{{ url_for('index') }}">
       <h2 class="font-weight-bold">Librari</h2>
     </a>
-    {% block menu %} {% endblock %}
+    {% set navbar = [
+      ('auth.signin', 'login', 'Login'),
+      ('auth.signup', 'signup', 'Sign Up'),
+    ] -%}
+
+    {% set active_page = active_page | default('login') -%}
+    {% block menu %}
+      <ul class="navbar-nav ml-auto">
+        {% for href, id, caption in navbar %}
+          <li {% if id == active_page %} class="active" {% endif %}>
+            <a class="nav-link" href="{{ url_for(href) }}">{{ caption }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endblock %}
   </nav>
   {% block content %} {% endblock %}
 </body>
