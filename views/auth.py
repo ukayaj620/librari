@@ -5,13 +5,13 @@ from models.user import User
 
 auth = Blueprint('auth', __name__, template_folder='templates', url_prefix='/auth')
 
-@auth.route('/signin')
-def signin():
-  return render_template('signin.html')
+@auth.route('/')
+def index():
+  return render_template('auth/signin.html')
 
 @auth.route('/signup')
 def signup():
-  return render_template('signup.html')
+  return render_template('auth/signup.html')
 
 @auth.route('/login', methods=['POST'])
 def login():
@@ -22,8 +22,8 @@ def login():
     session['loggedIn'] = True
   else:
     flash('Wrong password or email', 'danger')
-
-  return redirect(url_for('index'))
+  
+  return redirect(url_for('home.index'))
 
 @auth.route('/logout', methods=['GET'])
 def logout():
@@ -47,4 +47,4 @@ def register():
     }):
       flash('Data has been registered, please login', 'success')
   
-  return redirect(url_for('index'))
+  return redirect(url_for('auth.index'))
