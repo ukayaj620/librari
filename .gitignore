@@ -5,3 +5,4 @@ models/__pycache__
 credentials.py
 db/__pycache__
 views/__pycache__
+views/helpers/__pycache__
