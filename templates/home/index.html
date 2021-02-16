@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %} Home {% endblock %}
+
+{% block menu %}
+  <h6 class="font-weight-bold ml-auto my-auto mr-4">Hello, {{ session['name'] }} </h6>
+  <a href="{{ url_for('auth.logout') }}" class="btn btn-primary font-weight-bold">Log Out</a>
+{% endblock %}
+
+{% block content %} 
+  <div class="container d-flex flex-column flex-md-row mt-4">
+    <div class="col col-md-3">
+      {% set navbar = [
+        ('home.index', 'books', 'Books'),
+        ('home.category', 'categories', 'Categories'),
+      ] -%}
+  
+      {% set active_page = active_page | default('books') -%}
+      <ul class="navbar-nav w-75">
+        {% for href, id, caption in navbar %}
+          <li class="my-2">
+            <a 
+              role="button"
+              class="btn btn-primary w-100 {% if id == active_page %} active {% endif %}"
+              href="{{ url_for(href) }}"
+            >
+              {{ caption }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="col col-md-9">
+      {% block side %} {% endblock %}
+    </div>
+  </div>
+{% endblock %}
